@@ -23,24 +23,24 @@
 ## Roadmap
 
 #### Part 1: Data selection & Data Cleaning
-[] Selection of dataset 
-[] Storyboard model usage/training/prediction
-[] Cleaning of dataset
-[] Standardizing of dataset 
+- [] Selection of dataset 
+- [] Storyboard model usage/training/prediction
+- [] Cleaning of dataset
+- [] Standardizing of dataset 
 
 #### Part 2: Hosting onto a cloud server
-[] Upload data to a cloud server (Neon/AWS?)
-[] Pull data into javascript/python files
+- [] Upload data to a cloud server (Neon/AWS?)
+- [] Pull data into javascript/python files
 
 #### Part 3: Machine learning
-[] Create training model 
-[] Identify highest accurary parameters 
-[] Test prediction
+- [] Create training model 
+- [] Identify highest accurary parameters 
+- [] Test prediction
 
 #### Part 4: Create flask webpage 
-[] Host the model onto flask server
-[] Create training description page 
-[] Create use prediction page
+- [] Host the model onto flask server
+- [] Create training description page 
+-   [] Create use prediction page
 
 <!-- CONTACT -->
 ## Colaboraters
