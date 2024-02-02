@@ -1,0 +1,8 @@
+#Ignore .DS_Store
+.DS_Store
+
+#Ignore .ipynb_checkpoints
+.ipynb_checkpoints
+
+#Ignore Access_keys
+Access_keys
