@@ -6,3 +6,6 @@
 
 #Ignore Access_keys
 Access_keys
+
+#Ignore zip files
+*.zip
