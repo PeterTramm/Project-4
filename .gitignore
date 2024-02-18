@@ -4,5 +4,5 @@
 #Ignore .ipynb_checkpoints
 .ipynb_checkpoints
 
-#Ignore Access_keys
-Access_keys
+#Ignore .env
+.env
