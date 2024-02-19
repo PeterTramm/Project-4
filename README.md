@@ -12,7 +12,7 @@
 
 <p>The goal of this project is to utizlise machine learning to create a recommendation system for movies and tv-shows for an individual. 
 
-Hopefully We will gain access to IMBD free dataset API to use with AWS to create this model. If not we will use movielens dataset to achieve the same outcome. 
+We will be using a content based model to create a recommendation list
 </p>
 
 ### Built With
@@ -20,30 +20,27 @@ Hopefully We will gain access to IMBD free dataset API to use with AWS to create
 * HTML
 * JavaScript
 * Python
-* Amazon Web Services
+
 
 <!-- ROADMAP -->
 ## Roadmap
 
 #### Part 1: Data selection & Data Cleaning
-- [x] Selection of dataset ([IMBD dataset API](https://ap-southeast-2.console.aws.amazon.com/dataexchange/home?region=ap-southeast-2#/subscription-requests/ar-62ooqqu9rgpt9x235sp06f1qk) / [MovieLens Dataset](https://grouplens.org/datasets/movielens/latest/))
-- [ ] Storyboard model usage/training/prediction
-- [ ] Cleaning of dataset
-- [ ] Standardizing of dataset 
+- [x] Selection of dataset [TMDB API](https://developer.themoviedb.org/docs/getting-started)
 
-#### Part 2: Hosting dataset onto a cloud server
-- [ ] Upload data to a cloud server (AWS)
-- [ ] Pull data into where we write our ML model.
+- [x] Create dataframe from TMDB API 
 
-#### Part 3: Machine learning
-- [ ] Create training model 
-- [ ] Identify highest accurary parameters 
-- [ ] Test prediction
+#### Part 2: Model creation
+- [x] Create function to run the cosine similarity against features of the movie to compute 10 recommendations 
+
+#### Part 3: Model Precision and testing
+- [x] Define precision method to use for model
+- [x] Calculate general precision of model and its method 
 
 #### Part 4: Create flask webpage 
-- [ ] Host the model onto flask server
-- [ ] Create training description page 
-- [ ] Create use prediction page
+- [x] Host the model onto flask server
+- [x] Implement search bar
+- [x] Display the recommendation
 
 <!-- CONTACT -->
 ## Colaboraters
@@ -56,6 +53,7 @@ Hopefully We will gain access to IMBD free dataset API to use with AWS to create
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-
+[TMDB API](https://developer.themoviedb.org/docs/getting-started)
+[OMDB API](https://omdbapi.com/)
 
 

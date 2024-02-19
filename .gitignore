@@ -9,3 +9,6 @@ Access_keys
 
 #Ignore zip files
 *.zip
+
+#Ignore .env
+.env
