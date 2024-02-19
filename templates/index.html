@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMDB Movie List</title>
+    <style>
+        /* Add your CSS styles here */
+        /* Example: */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/shades-of-red-abstract-background-jeja.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            /* Added padding and border to the container */
+            padding: 40px;
+            border: 5px solid #fff;
+        }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: Black;
+            /* Changed the font family to Roboto */
+            font-family: 'Roboto', sans-serif;
+        }
+        h2 {
+            text-align: center;
+            font-size: 36px;
+            color: black; /* Change title color to white */
+            margin-bottom: 20px;
+            /* Changed the font family to Roboto */
+            font-family: 'Roboto', sans-serif;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(150px, 1fr)); /* Adjusted column width */
+            grid-gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Add more styles as needed */
+        .movie-card {
+            display: flex;
+            flex-direction: column;
+            height: 320px; /* Reduced height */
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            cursor: pointer; /* Add cursor pointer for clickable effect */
+            position: relative;
+            /* Added a transition for the hover effect */
+            transition: 0.3s ease;
+        }
+        .movie-card img {
+            width: 100%; /* Ensures equal size for all images */
+            max-height: 250px; /* Adjusted height */
+            object-fit: cover; /* Ensures the entire image is visible */
+        }
+        .movie-card-title {
+            position: absolute;
+            bottom: 10px; /* Adjusted position to be on bottom */
+            left: 10px;
+            color: Black; /* Changed title color to white */
+            font-size: 14px; /* Reduced font size */
+            font-weight: bold;
+            z-index: 1; /* Ensure the title is above the image */
+            /* Changed the font family to Lato */
+            font-family: 'Lato', sans-serif;
+        }
+        .movie-card-info {
+            display: none; /* Initially hide movie info */
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            /* height: 80%; */
+            padding: 10px;
+            background-color: #FCF3CF; /* Semi-transparent white background */
+            position: absolute;
+            top: 0; /* Adjusted position to be on top */
+            left: 0;
+            right: 0;
+            transition: 0.3s ease;
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds the box height */
+        }
+        .movie-card:hover .movie-card-info {
+            display: flex; /* Show movie info on hover */
+            
+        }
+        .movie-card-plot {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: justify;
+            margin-left: 10px; /* Added left margin */
+        }
+        .search-container {
+            display: flex;
+            /* Added justify-content and align-items to center the elements */
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-container input[type=text] {
+            padding: 10px;
+            width: 50%;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            /* Added margin to the input */
+            /* margin-right: 10px; */
+        }
+        .search-container button {
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-height: 80%; /* Limit the maximum height of the modal content */
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds the modal's height */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #232F3E;
+            color: #FFFFFF;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            font-size: 8;
+        }
+
+        .footer-section {
+            width: 20%; /* Adjust width as needed */
+            font-size: 8;
+        }
+
+        .footer-content {
+            display: none;
+            font-family: Arial, sans-serif;
+            font-size: 8;
+        }
+
+        .footer-section:hover .footer-content {
+            display: block;
+            font-size: xx-small;
+        }
+
+    </style>
+    <!-- Imported the fonts from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Lato:400,700" rel="stylesheet">
+</head>
+<body>
+    <h1>TMDB Movie List</h1>
+    
+    <div class="search-container">
+        <form action="/" method="post">
+            <input type="text" placeholder="Enter movie title" name="movie_title">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <!-- Display recommended movies using the grid layout -->
+        <h2>Recommended Movies</h2>
+        <div class="grid">
+            {% if recommended_movies %}
+                {% for movie in recommended_movies %}
+                    <div class="movie-card" onclick="showDescription('{{ movie['Title'] }}', '{{ movie['Plot'] }}')">
+                        <img src="{{ movie['Poster'] }}" alt="{{ movie['Title'] }}">
+                        <div class="movie-card-info">
+                            <div class="movie-card-plot">{{ movie['Plot'] }}</div>
+                        </div>
+                        <div class="movie-card-title">{{ movie['Title'] }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No match found.</p>
+            {% endif %}
+        </div>
+
+
+        <!-- Display random movies using the grid layout -->
+        <h2>Movies You Might Like</h2>
+        <div class="grid">
+            {% if random_movies %}
+                {% for movie in random_movies %}
+                    <div class="movie-card" onclick="showDescription('{{ movie['Title'] }}', '{{ movie['Plot'] }}')">
+                        <img src="{{ movie['Poster'] }}" alt="{{ movie['Title'] }}">
+                        <div class="movie-card-info">
+                            <div class="movie-card-plot">{{ movie['Plot'] }}</div>
+                        </div>
+                        <div class="movie-card-title">{{ movie['Title'] }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No match found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Modal for displaying movie description -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="movie-title"></h2>
+            <p id="movie-description"></p>
+        </div>
+    </div>
+    
+    <!-- Footer section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3 style="font-size: 10px;">About This Site</h3>
+                <p class="footer-content">Welcome to our movie recommendation platform! At our site, we're dedicated to providing you with personalized movie recommendations that match your unique preferences.
+
+                    Using cutting-edge algorithms and natural language processing techniques, we analyze the plots of thousands of movies to identify similarities and connections. Whether you're a fan of action-packed thrillers, heartwarming dramas, or captivating documentaries, we've got recommendations for every taste.
+                    
+                    Simply enter the title of a movie you love, and let our system do the rest. Explore a curated selection of top recommendations based on similarities, ensuring that every movie suggestion resonates with your interests.
+                    
+                    Please note that this website is for demonstration purposes only. All movie data and recommendations are generated dynamically and do not represent real-world data or recommendations.
+                    
+                    Thank you for choosing our movie recommendation service. Sit back, relax, and embark on a cinematic journey tailored just for you!.</p>
+            </div>
+            <div class="footer-section">
+                <h3 style="font-size: 10px;">Contact Us</h3>
+                <p class="footer-content">Ekjoyt</p>
+                <p class="footer-content">Peter Tram</p>
+                <p class="footer-content">Yared Haile</p>
+            </div>
+            <div class="footer-section">
+                <h3 style="font-size: 10px;">Disclaimer</h3>
+                <p class="footer-content">This website is for demonstration purposes only. While the movie data is sourced from real-world datasets, the recommendations are generated based on similarities and do not necessarily reflect real-world preferences or recommendations.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Function to display movie description in modal
+        function showDescription(title, description) {
+            var modal = document.getElementById("myModal");
+            var titleContent = document.getElementById("movie-title");
+            var descriptionContent = document.getElementById("movie-description");
+            titleContent.innerHTML = title;
+            descriptionContent.innerHTML = description;
+            modal.style.display = "block";
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
