@@ -4,5 +4,11 @@
 #Ignore .ipynb_checkpoints
 .ipynb_checkpoints
 
+#Ignore Access_keys
+Access_keys
+
+#Ignore zip files
+*.zip
+
 #Ignore .env
 .env
