@@ -1,0 +1,8 @@
+Index, Model,Overall Accuracy,Parameters
+1,Cosine Similarity Model 1, 0.14, Genre tfidf matrix 
+2, Cosine Similarity Model 2, 0.17, Plot tfidf matrix
+3, Cosine Similarity Model 3, 0.17, Genre + Plot tfidf matrix 
+4, Nearest Neighbors Model 1, 0.12, Genre tfidf matrix
+5, Nearest Neighbors Model 2, 0.17, Plot tfidf matrix
+6, Nearest Neighbors Model 3, 0.17, Genre + Plot tfidf matrix 
+7, KD tree Model 1, 0.1, Genre + Plot tfidf 
